@@ -14,15 +14,12 @@ def createaccount(name):
 	address = str(address)
 	username = "'" + name + "'"
 	address = "'" + address + "'"
-	if "-" not in username:
-		query = 'INSERT INTO accounts (username, address) VALUES (' + username + ', ' + address + ')'
-		print(query)
-		cursor.execute(query)
-		connection.commit()
-		address = address.replace("'", "")
-		return address
-	else:
-		return "prohibited_inc_username"
+	query = 'INSERT INTO accounts (username, address) VALUES (' + username + ', ' + address + ')'
+	print(query)
+	cursor.execute(query)
+	connection.commit()
+	address = address.replace("'", "")
+	return address
 def getaddress(name):
 	dbpath = '~/koto-account.sqlite'
 	connection = sqlite3.connect(dbpath)
