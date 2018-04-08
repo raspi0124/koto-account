@@ -2,7 +2,6 @@ import sqlite3
 import subprocess
 import re
 def createaccount(name):
-	#prohibited = ["(", ")", "&", ";", ":", "=", "!", "*", "{", "}", "[", "]", "/", "'", '"', "|", "~", "-",]
 	dbpath = '~/koto-account.sqlite'
 	connection = sqlite3.connect(dbpath)
 	# 自動コミットにする場合は下記を指定（コメントアウトを解除のこと）
@@ -31,21 +30,20 @@ def getaddress(name):
 	#connection.isolation_level = None
 	cursor = connection.cursor()
 	username = "'" + name + "'"
-	if "-" not in name:
-		query = 'select address from accounts where username = ' + username + ''
-		print(query)
-		cursor.execute(query)
-		address = cursor.fetchall()
-		print(address)
-		address = address[0]
-		address = str(address)
-		address = address.rstrip()
-		address = address.replace("'", "")
-		address = address.replace("(", "")
-		address = address.replace(")", "")
-		address = address.replace(",", "")
-		address = address.replace("\\n", "")
-		return address
+	query = 'select address from accounts where username = ' + username + ''
+	print(query)
+	cursor.execute(query)
+	address = cursor.fetchall()
+	print(address)
+	address = address[0]
+	address = str(address)
+	address = address.rstrip()
+	address = address.replace("'", "")
+	address = address.replace("(", "")
+	address = address.replace(")", "")
+	address = address.replace(",", "")
+	address = address.replace("\\n", "")
+	return address
 def getbalance(name):
 	address = getaddress(name)
 	cmda = "koto-cli z_getbalance " + address + ""
