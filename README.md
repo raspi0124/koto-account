@@ -1,0 +1,2 @@
+# koto-account
+PythonのKotoアカウントシステムです。ぶっちゃけただのライブラリです。
